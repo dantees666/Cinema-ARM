@@ -154,7 +154,6 @@ namespace CinemaARM
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "InterForm";
             this.Text = "Ввод фильмов";
-            this.Load += new System.EventHandler(this.InterForm_Load);
             this.typePanel.ResumeLayout(false);
             this.typePanel.PerformLayout();
             this.ResumeLayout(false);

@@ -237,10 +237,5 @@ namespace CinemaARM
             filmButton.Checked = false;
             serialButton.Checked = false;
         }
-
-        private void InterForm_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

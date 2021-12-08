@@ -21,7 +21,7 @@ namespace CinemaARM
         /// Массив сеансов.
         /// Количество сериалов по умолчанию - 2.
         /// </summary>
-        private Session[] sessions = new Session[2];
+        private Session[] sessions { get; set; } = new Session[2];
         /// <summary>
         /// Конструктор для Serial.
         /// </summary>

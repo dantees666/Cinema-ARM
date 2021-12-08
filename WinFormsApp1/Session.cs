@@ -12,15 +12,15 @@ namespace CinemaARM
         /// <summary>
         /// Цена билета.
         /// </summary>
-        private int ticket_price;
+        private int ticket_price { get; set; }
         /// <summary>
         /// Дата сеанса.
         /// </summary>
-        private DateTime session_date;
+        private DateTime session_date { get; set; }
         /// <summary>
         /// Матрица мест.
         /// </summary>
-        private bool[,] seats = new bool[10, 10];
+        private bool[,] seats { get; set; } = new bool[10, 10];
         /// <summary>
         /// Конструктор для Session.
         /// </summary>

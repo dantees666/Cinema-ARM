@@ -17,7 +17,7 @@ namespace CinemaARM
         /// Массив сеансов для фильма.
         /// По умолчанию количество сеансов - 5.
         /// </summary>
-        private Session[] sessions = new Session[5];
+        private Session[] sessions { get; set; } = new Session[5];
         /// <summary>
         /// Конструктор для Film.
         /// </summary>
