@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace CinemaARM
 {
@@ -12,16 +13,16 @@ namespace CinemaARM
         /// <summary>
         /// Количество серий в сериале.
         /// </summary>
-        private int count_of_series;
+        public int Count_of_series { get; set; }
         /// <summary>
         /// Длительность сеанса в минутах.
         /// </summary>
-        private int serial_duration;
+        public int Serial_duration { get; set; }
         /// <summary>
         /// Массив сеансов.
         /// Количество сериалов по умолчанию - 2.
         /// </summary>
-        private Session[] sessions { get; set; } = new Session[2];
+        public Session[] sessions { get; set; } = new Session[2];
         /// <summary>
         /// Конструктор для Serial.
         /// </summary>
@@ -31,6 +32,8 @@ namespace CinemaARM
         /// <param name="hall"></param>
         /// <param name="count_of_series"></param>
         /// <param name="serial_duration"></param>
+        //Конструктор без параметров для сериализации
+        public Serial() { }
         public Serial(string title = "",
                       string genre = "",
                       int age_limit = 0,
@@ -42,16 +45,7 @@ namespace CinemaARM
             Serial_duration = serial_duration;
             fill_in_sessions();
         }
-        public int Count_of_series
-        {
-            get { return count_of_series; }
-            private set { count_of_series = value; }
-        }
-        public int Serial_duration
-        {
-            get { return serial_duration; }
-            private set { serial_duration = value; }
-        }
+
         public override Session[] Sessions
         {
             get { return sessions; }
@@ -70,6 +64,11 @@ namespace CinemaARM
                 sessions[i] = new Session(ticket_price, session_time);
                 session_time = session_time.AddHours(10);
             }
+        }
+        //Сериализация
+        public override string serializeShow()
+        {
+            return JsonSerializer.Serialize<Serial>(this);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace CinemaARM
 {
@@ -12,12 +13,12 @@ namespace CinemaARM
         /// <summary>
         /// Длительность фильма в минутах.
         /// </summary>
-        private int film_duration;
+        public int Film_duration { get; set; }
         /// <summary>
         /// Массив сеансов для фильма.
         /// По умолчанию количество сеансов - 5.
         /// </summary>
-        private Session[] sessions { get; set; } = new Session[5];
+        public Session[] sessions { get; set; } = new Session[5];
         /// <summary>
         /// Конструктор для Film.
         /// </summary>
@@ -26,6 +27,8 @@ namespace CinemaARM
         /// <param name="age_limit"></param>
         /// <param name="hall"></param>
         /// <param name="film_duration"></param>
+        //Конструктор без параметров для сериализации
+        public Film() { }
         public Film(string title = "",
                     string genre = "",
                     int age_limit = 0,
@@ -34,11 +37,6 @@ namespace CinemaARM
         {
             Film_duration = film_duration;
             fill_in_sessions();
-        }
-        public int Film_duration
-        {
-            get { return film_duration; }
-            private set { film_duration = value; }
         }
 
         public override Session[] Sessions
@@ -63,6 +61,11 @@ namespace CinemaARM
                 sessions[i] = new Session(ticket_price, session_time);
                 session_time = session_time.AddHours(3);
             }
+        }
+        //Сериализация
+        public override string serializeShow()
+        {
+            return JsonSerializer.Serialize<Film>(this);
         }
     }
 }

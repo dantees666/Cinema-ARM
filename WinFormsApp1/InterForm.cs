@@ -1,10 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Text.Json;
 
 namespace CinemaARM
 {
@@ -220,6 +222,19 @@ namespace CinemaARM
         //При нажатии кнопки "Готово", вызывается основная форма,в которую передается список показов.
         private void start_Button_Click(object sender, EventArgs e)
         {
+            //При переходе в основную форму десериализуем объекты прошлого запуска
+            StreamReader sw = File.OpenText("TestWrite.json");
+            string line;
+
+            while ((line = sw.ReadLine()) != null)
+            {
+                if (line.Contains("Count_of_series"))
+                    shows.Add(JsonSerializer.Deserialize<Serial>(line));
+                else
+                    shows.Add(JsonSerializer.Deserialize<Film>(line));
+            }
+            sw.Close();
+
             Hide();
             MainForm f = new MainForm(shows);
             f.ShowDialog();
@@ -236,6 +251,12 @@ namespace CinemaARM
             data_Panel.Controls.Clear();
             filmButton.Checked = false;
             serialButton.Checked = false;
+        }
+        //Кнопка очищает данные прошлого запуска
+        private void clearData_Button_Click(object sender, EventArgs e)
+        {
+            File.WriteAllText("TestWrite.json", string.Empty);
+            MessageBox.Show("Данные прошлого запуска удалены!");
         }
     }
 }

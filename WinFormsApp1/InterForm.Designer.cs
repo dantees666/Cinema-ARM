@@ -39,6 +39,7 @@ namespace CinemaARM
             this.start_Button = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.countBox = new System.Windows.Forms.TextBox();
+            this.clearData_Button = new System.Windows.Forms.Button();
             this.typePanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -139,11 +140,22 @@ namespace CinemaARM
             this.countBox.Size = new System.Drawing.Size(30, 23);
             this.countBox.TabIndex = 8;
             // 
+            // clearData_Button
+            // 
+            this.clearData_Button.Location = new System.Drawing.Point(12, 241);
+            this.clearData_Button.Name = "clearData_Button";
+            this.clearData_Button.Size = new System.Drawing.Size(156, 50);
+            this.clearData_Button.TabIndex = 9;
+            this.clearData_Button.Text = "Очистить предыдущие данные";
+            this.clearData_Button.UseVisualStyleBackColor = true;
+            this.clearData_Button.Click += new System.EventHandler(this.clearData_Button_Click);
+            // 
             // InterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 340);
+            this.Controls.Add(this.clearData_Button);
             this.Controls.Add(this.countBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.start_Button);
@@ -173,5 +185,6 @@ namespace CinemaARM
         private System.Windows.Forms.RadioButton filmButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox countBox;
+        private System.Windows.Forms.Button clearData_Button;
     }
 }

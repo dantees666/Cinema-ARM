@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace CinemaARM
 {
@@ -12,23 +13,23 @@ namespace CinemaARM
         /// <summary>
         /// Название фильма или сериала.
         /// </summary>
-        protected string title; 
+        public string Title { get; set; }
         /// <summary>
         /// Жанр фильма или сериала.
         /// </summary>
-        protected string genre;
+        public string Genre { get; set; }
         /// <summary>
         /// Возрастное ограничение фильма или сериала.
         /// </summary>
-        protected int age_limit;
+        public int Age_limit { get; set; }
         /// <summary>
         /// Зал, в котором производится показ.
         /// </summary>
-        protected int hall;
+        public int Hall { get; set; }
         /// <summary>
         /// Минимальная цена билета.
         /// </summary>
-        protected const int minimal_ticket_price = 150;
+        public const int minimal_ticket_price = 150;
         /// <summary>
         /// Конструктор для Show.
         /// </summary>
@@ -36,6 +37,8 @@ namespace CinemaARM
         /// <param name="genre"></param>
         /// <param name="age_limit"></param>
         /// <param name="hall"></param>
+        //Конструктор без параметров для сериализации
+        public Show() { }
         public Show(string title = "",
                     string genre = "",
                     int age_limit = 0,
@@ -47,27 +50,6 @@ namespace CinemaARM
             Hall = hall;
         }
 
-        public string Title
-        {
-            get { return title; }
-            private set { title = value; }
-        }
-        public string Genre
-        {
-            get { return genre; }
-            private set { genre = value; }
-        }
-        public int Age_limit
-        {
-            get { return age_limit; }
-            private set { age_limit = value; }
-        }
-
-        public int Hall
-        {
-            get { return hall; }
-            private set { hall = value; }
-        }
         /// <summary>
         /// Метод, возвращающий массив сеансов данного фильма или сериала.
         /// </summary>
@@ -77,5 +59,7 @@ namespace CinemaARM
         /// Функция для автозаполенния сеансов.
         /// </summary>
         protected abstract void fill_in_sessions();
+        //Сериализация
+        public abstract string serializeShow();
     }
 }

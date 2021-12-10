@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.Json;
 
 namespace CinemaARM
 {
@@ -123,7 +125,7 @@ namespace CinemaARM
 
                     //Проверяем доступно ли место для покупки. Если да - делаем кнопку зеленой,
                     //если нет - делаем кнопку серой и недоступной для нажатия
-                    if (films[selected_film_index].Sessions[selected_session_index].Seats[i, j] == true)
+                    if (films[selected_film_index].Sessions[selected_session_index].Seats[i][j] == true)
                         _buttons[i, j].BackColor = Color.LightGreen;
                     else
                     {
@@ -235,6 +237,16 @@ namespace CinemaARM
 
         private void endButton_Click(object sender, EventArgs e)
         {
+            //При завершении работы записываем все данные в JSON-документ
+
+            StreamWriter file = File.CreateText("TestWrite.json");
+
+            foreach (Show show in films)
+            {
+                file.WriteLine(show.serializeShow());
+            }
+            file.Close();
+
             MessageBox.Show("Смена закрыта!\nДоход составил: " + totalIncome + " рублей.");
             Application.Exit();
         }
